@@ -10,10 +10,15 @@ public class HeroMovement : MonoBehaviour
 
     [SerializeField]
     float jumpHigh;
+    [SerializeField]
+    float mouseSens;
 
     Collision ground;
 
     Vector3 direction;
+    Vector3 rotation;
+    Vector3 cameraRotation;
+    Vector3 cameraMovement;
     float maxJumpValue;
 
     // Start is called before the first frame update
@@ -44,11 +49,11 @@ public class HeroMovement : MonoBehaviour
 
 
         if (Input.GetKey("w"))
-            direction += transform.forward;
+            direction += transform.forward * 4;
         if (Input.GetKey("a"))
             direction -= transform.right;
         if (Input.GetKey("s"))
-            direction -= transform.forward;
+            direction -= transform.forward * 4;
         if (Input.GetKey("d"))
             direction += transform.right;
         if (Input.GetKey("space") && isJumpReady)
@@ -56,10 +61,19 @@ public class HeroMovement : MonoBehaviour
             jumpDirection = Vector3.up;
         }
 
+        if(Input.GetMouseButton(1))
+        {
+            cameraRotation = new Vector3(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
+        }
+
+        rotation = new Vector3(0, Input.GetAxis("Mouse X"), 0);
 
         transform.localPosition += direction * speed * Time.deltaTime;
         transform.localPosition += jumpDirection * jumpHigh * Time.deltaTime;
 
+        transform.Rotate(rotation * mouseSens * Time.deltaTime);
+
+        //Camera.current.transform.Rotate(cameraRotation * -mouseSens * Time.deltaTime);
     }
 
 
