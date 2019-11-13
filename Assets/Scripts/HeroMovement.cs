@@ -44,13 +44,13 @@ public class HeroMovement : MonoBehaviour
 
 
         if (Input.GetKey("w"))
-            direction += Vector3.forward;
+            direction += transform.forward;
         if (Input.GetKey("a"))
-            direction += Vector3.left;
+            direction -= transform.right;
         if (Input.GetKey("s"))
-            direction += Vector3.back;
+            direction -= transform.forward;
         if (Input.GetKey("d"))
-            direction += Vector3.right;
+            direction += transform.right;
         if (Input.GetKey("space") && isJumpReady)
         {
             jumpDirection = Vector3.up;
