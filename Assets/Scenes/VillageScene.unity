@@ -4766,10 +4766,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8253cd6fc90260946b692eecd1a0ee90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 10
   jumpHigh: 8
-  mouseSens: 150
-  rotationSpeed: 20
+  mouseSens: 5
+  rotationSpeed: 100
 --- !u!114 &514383146
 MonoBehaviour:
   m_ObjectHideFlags: 0

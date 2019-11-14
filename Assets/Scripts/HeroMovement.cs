@@ -22,11 +22,14 @@ public class HeroMovement : MonoBehaviour
     Vector3 cameraRotation;
     Vector3 cameraMovement;
     float maxJumpValue;
+    float yaw, pitch;
 
     // Start is called before the first frame update
     void Start()
     {
         maxJumpValue = float.MinValue;
+        cameraRotation = new Vector3(0, 0, 0);
+        yaw = pitch = 0;
     }
 
     // Update is called once per frame
@@ -40,6 +43,11 @@ public class HeroMovement : MonoBehaviour
         {
             Move();
         }
+    }
+
+    private void LateUpdate()
+    {
+        Camera.current.transform.localEulerAngles = cameraRotation * mouseSens;
     }
 
 
@@ -65,19 +73,26 @@ public class HeroMovement : MonoBehaviour
             jumpDirection = Vector3.up;
         }
 
-        if(Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1))
         {
-            cameraRotation = new Vector3(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
+            yaw = Input.GetAxisRaw("Mouse X") * mouseSens;
+            pitch = -Input.GetAxisRaw("Mouse Y") * mouseSens;
+            cameraRotation += new Vector3(pitch, yaw, 0);
+        }
+        else
+        {
+            //yaw = pitch = 0;
+            cameraRotation = new Vector3(0, 0, 0);
         }
 
-        rotation = new Vector3(0, Input.GetAxis("Mouse X"), 0);
+        //rotation = new Vector3(0, Input.GetAxis("Mouse X"), 0);
 
         transform.localPosition += direction * speed * Time.deltaTime;
         transform.localPosition += jumpDirection * jumpHigh * Time.deltaTime;
 
         //transform.Rotate(rotation * mouseSens * Time.deltaTime);
 
-        //Camera.current.transform.Rotate(cameraRotation * -mouseSens * Time.deltaTime);
+
     }
 
 
@@ -111,5 +126,7 @@ public class HeroMovement : MonoBehaviour
         }
         
     }
+
+
 
 }
