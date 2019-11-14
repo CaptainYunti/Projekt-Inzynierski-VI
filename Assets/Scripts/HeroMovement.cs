@@ -12,6 +12,8 @@ public class HeroMovement : MonoBehaviour
     float jumpHigh;
     [SerializeField]
     float mouseSens;
+    [SerializeField]
+    float rotationSpeed;
 
     Collision ground;
 
@@ -49,13 +51,15 @@ public class HeroMovement : MonoBehaviour
 
 
         if (Input.GetKey("w"))
-            direction += transform.forward * 4;
+            direction += transform.forward;
         if (Input.GetKey("a"))
-            direction -= transform.right;
+            //direction -= transform.right;
+            transform.Rotate(0, -rotationSpeed * Time.deltaTime, 0);
         if (Input.GetKey("s"))
-            direction -= transform.forward * 4;
+            direction -= transform.forward;
         if (Input.GetKey("d"))
-            direction += transform.right;
+            //direction += transform.right;
+            transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
         if (Input.GetKey("space") && isJumpReady)
         {
             jumpDirection = Vector3.up;
@@ -71,7 +75,7 @@ public class HeroMovement : MonoBehaviour
         transform.localPosition += direction * speed * Time.deltaTime;
         transform.localPosition += jumpDirection * jumpHigh * Time.deltaTime;
 
-        transform.Rotate(rotation * mouseSens * Time.deltaTime);
+        //transform.Rotate(rotation * mouseSens * Time.deltaTime);
 
         //Camera.current.transform.Rotate(cameraRotation * -mouseSens * Time.deltaTime);
     }
