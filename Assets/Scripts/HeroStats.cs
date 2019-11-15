@@ -38,7 +38,7 @@ public static class HeroStats
     public static int GetKilledAllCow() { return killedAllCow; }
     public static int GetKilledAllPig() { return killedAllPig; }
     public static int GetKilledAllDuck() { return killedAllDuck; }
-    public static int GetKilledallSheep() { return killedAllSheep; }
+    public static int GetKilledAllSheep() { return killedAllSheep; }
     public static int GetChickenLevel() { return chickenLevel; }
     public static int GetCowLevel() { return cowLevel; }
     public static int GetPigLevel() { return pigLevel; }
