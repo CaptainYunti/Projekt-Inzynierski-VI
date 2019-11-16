@@ -6,10 +6,16 @@ public abstract class EnemyBehaviour : MonoBehaviour
 {
     public int maxHP;
     public int currentHP;
+    public float speed;
     //public int strength;
     //public float attackSpeed;
     public float range;
+    public int expFromThis;
 
+    private void Start()
+    {
+        currentHP = maxHP = 4;
+    }
     public abstract void AttackHero();
     public abstract void AttackNPC();
     public abstract void DefendNPC();
@@ -22,18 +28,27 @@ public abstract class EnemyBehaviour : MonoBehaviour
     public abstract void RunRandom();
     public abstract void NormalBehaviour();
     public abstract void Move();
+    protected abstract void StatsUpdate();
     public bool IsDead()
     {
         if (currentHP > 0)
             return false;
+        StatsUpdate();
         return true;
     }
-    public void GetDamage(int damage)
+    protected void GetDamage(int damage)
     {
         currentHP -= damage;
         if(IsDead())
         {
             gameObject.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if(col.gameObject.tag == "Weapon")
+        {
         }
     }
 
