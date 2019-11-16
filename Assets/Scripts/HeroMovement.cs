@@ -23,6 +23,8 @@ public class HeroMovement : MonoBehaviour
     Vector3 cameraMovement;
     float maxJumpValue;
     float yaw, pitch;
+    public Animator anim;
+    bool walk, run;
 
     Camera backCamera, frontCamera, birdViewCamera,
         izzyTalkCamera, izzySideCamera;
@@ -35,6 +37,8 @@ public class HeroMovement : MonoBehaviour
         cameraRotation = new Vector3(0, 0, 0);
         yaw = pitch = 0;
         SetCameras();
+        anim = GetComponent<Animator>();
+        walk = run = false;
 
     }
 
@@ -45,7 +49,7 @@ public class HeroMovement : MonoBehaviour
         isJumpReady = ReadyToJump(ground);
         //isJumpReady = false;
 
-        if(Input.GetKey("k"))
+        if (Input.GetKey("k"))
         {
 
         }
@@ -55,12 +59,17 @@ public class HeroMovement : MonoBehaviour
         {
             Move();
         }
+        else
+            walk = run = false;
 
     }
 
     private void LateUpdate()
     {
-        Camera.main.transform.localEulerAngles = cameraRotation * mouseSens;
+        if(backCamera.isActiveAndEnabled)
+            Camera.main.transform.localEulerAngles = cameraRotation * mouseSens;
+        anim.SetBool("Walk", walk);
+        anim.SetBool("Run", run);
     }
 
 
@@ -71,19 +80,47 @@ public class HeroMovement : MonoBehaviour
 
 
 
-        if (Input.GetKey("w"))
+        if (Input.GetKey("w") && Input.GetKey(KeyCode.LeftShift))
+        {
+            direction += transform.forward*2;
+            walk = false;
+            run = true;
+        }
+        else if (Input.GetKey("w"))
+        {
             direction += transform.forward;
+            run = false;
+            walk = true;
+        }
+
         if (Input.GetKey("a"))
+        {
             //direction -= transform.right;
             transform.Rotate(0, -rotationSpeed * Time.deltaTime, 0);
+            if (!run)
+                walk = true;
+        }
+
         if (Input.GetKey("s"))
+        {
+            if (!run)
+                walk = true;
             direction -= transform.forward;
+        }
+
         if (Input.GetKey("d"))
+        {
+            if (!run)
+                walk = true;
             //direction += transform.right;
             transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+        }
+
+
         if (Input.GetKey("space") && isJumpReady)
         {
             jumpDirection = Vector3.up;
+            walk = false;
         }
 
         if (Input.GetMouseButton(1))
