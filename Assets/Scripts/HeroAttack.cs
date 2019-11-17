@@ -15,6 +15,8 @@ public class HeroAttack : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         eat = false;
+        beak = GameObject.Find("Toon Chicken/Beak");
+        beak.SetActive(false);
     }
 
     // Update is called once per frame
@@ -23,10 +25,12 @@ public class HeroAttack : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             eat = true;
+            beak.SetActive(true);
         }
         else
         {
             eat = false;
+            beak.SetActive(false);
         }
     }
 

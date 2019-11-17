@@ -49,6 +49,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     {
         if(col.gameObject.tag == "Weapon")
         {
+
         }
     }
 
