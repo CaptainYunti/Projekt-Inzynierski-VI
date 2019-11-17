@@ -6,7 +6,7 @@ public class HeroMovement : MonoBehaviour
 {
 
     public float speed;
-    bool isJumpReady;
+    public bool isJumpReady;
 
     [SerializeField]
     float jumpHigh;
