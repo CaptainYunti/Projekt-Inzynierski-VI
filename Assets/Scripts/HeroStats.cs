@@ -4,29 +4,21 @@ using UnityEngine;
 
 public static class HeroStats
 {
-    [SerializeField]
     static int strength;
-    [SerializeField]
     static int level;
-    [SerializeField]
     static int maxHP;
-    [SerializeField]
     static int currentHP;
-    [SerializeField]
     static int chickenLevel;
-    [SerializeField]
     static int cowLevel;
-    [SerializeField]
     static int pigLevel;
-    [SerializeField]
     static int duckLevel;
-    [SerializeField]
     static int sheepLevel;
 
     static int killedChicken, killedCow, killedPig, killedDuck, killedSheep;
-    static int killedAllChicken, killedAllCow, killedAllPig, killedAllDuck, killedAllSheep;
+    static int killedAllChicken, killedAllCow, killedAllPig, killedAllDuck, killedAllSheep ;
     static int exp;
     static int expNextLevel;
+
 
     public static int GetStrength() { return strength; }
     public static int GetLevel() { return level; }

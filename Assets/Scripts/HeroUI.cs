@@ -34,7 +34,7 @@ public class HeroUI : MonoBehaviour
         strength.text = "Siła: " + HeroStats.GetStrength().ToString();
         level.text = "Poziom: " + HeroStats.GetLevel().ToString();
         exp.text = "Exp: " + HeroStats.GetExp().ToString();
-        expNextLevel.text = "Następny poziom: " + HeroStats.GetNextLevel().ToString();
+        expNextLevel.text = "Exp do następnego poziomu: " + HeroStats.GetNextLevel().ToString();
         chickenLevel.text = "Poziom walki - kurczak: " + HeroStats.GetChickenLevel().ToString();
         cowLevel.text = "Poziom walki - krowa: " + HeroStats.GetCowLevel().ToString();
         pigLevel.text = "Poziom walki - świnia: " + HeroStats.GetPigLevel().ToString();
