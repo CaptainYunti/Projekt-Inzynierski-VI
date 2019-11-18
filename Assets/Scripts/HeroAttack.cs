@@ -8,7 +8,6 @@ public class HeroAttack : MonoBehaviour
     Animator anim;
     bool eat;
     GameObject beak;
-    SphereCollider beakCollider;
     
     // Start is called before the first frame update
     void Start()

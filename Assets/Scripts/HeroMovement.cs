@@ -46,14 +46,7 @@ public class HeroMovement : MonoBehaviour
     void Update()
     {
        
-        isJumpReady = ReadyToJump(ground);
-        //isJumpReady = false;
-
-        if (Input.GetKey("k"))
-        {
-
-        }
-        else
+        isJumpReady = ReadyToJump();
 
         if (Input.anyKey)
         {
@@ -178,7 +171,7 @@ public class HeroMovement : MonoBehaviour
     }
 
 
-    private bool ReadyToJump(Collision ground)
+    private bool ReadyToJump()
     {
 
         //if zamienip=ony na OnCollisionStay
