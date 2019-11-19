@@ -5,47 +5,76 @@ using UnityEngine;
 public class IzzyAnimation : MonoBehaviour
 {
     [SerializeField]
-    public bool jump, lost, wait1, wait2, hello;
+    public bool jump, lost, hello;
+
+    [SerializeField]
+    bool isDialog, isInRange, isAnimationEven, wannaTalk;
 
     private Animator anim;
+    private bool breakCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        jump = lost = wait1 = wait2 = hello = false;
+        jump = lost = hello = false;
+        isDialog = isInRange = isAnimationEven = wannaTalk = false;
+        breakCoroutine = false;
+        StartCoroutine(IzzyBehaviour());
     }
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         anim.SetBool("Jump", jump);
         anim.SetBool("Lose", lost);
-        anim.SetBool("Wait1", wait1);
-        anim.SetBool("Wait2", wait2);
         anim.SetBool("Hello", hello);
     }
 
     private void Jump()
     {
         jump = true;
-        lost = wait1 = wait2 = hello = false;
+        lost = hello = false;
     }
 
     private void Damage()
     {
         lost = true;
-        jump = wait1 = wait2 = hello = false;
+        jump = hello = false;
     }
 
-    private void Wait()
-    {
-        jump = lost = hello = false;
-    }
 
     private void Hello()
     {
         hello = true;
-        jump = lost = wait1 = wait2 = false;
+        jump = lost =  false;
+    }
+
+    private IEnumerator IzzyBehaviour()
+    {
+
+        if (isDialog)
+        {
+            yield break;
+        }
+        if(isInRange && wannaTalk)
+        {
+
+        }
+
+        Wait();
+        isAnimationEven = !isAnimationEven;
+
+        yield return new WaitForSeconds(30);
+        StartCoroutine(IzzyBehaviour());
+        yield return null;
+    }
+
+    private void Wait()
+    {
+        if (isAnimationEven)
+            anim.Play("WAIT02", -1, 1);
+        else
+            anim.Play("WAIT01", -1, 1);
     }
 }
