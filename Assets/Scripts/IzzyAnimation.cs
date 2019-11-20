@@ -5,20 +5,26 @@ using UnityEngine;
 public class IzzyAnimation : MonoBehaviour
 {
     [SerializeField]
-    public bool jump, lost, hello;
+    public bool jump, lost;
 
     [SerializeField]
-    bool isDialog, isInRange, isAnimationEven, wannaTalk;
+    bool isDialog, isAnimationEven, wannaTalk, inSight;
+
+    [SerializeField]
+    float range, fieldOfViewAngle;
 
     private Animator anim;
     private bool breakCoroutine;
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
-        jump = lost = hello = false;
-        isDialog = isInRange = isAnimationEven = wannaTalk = false;
+        jump = lost = false;
+        isDialog = inSight = isAnimationEven = false;
+        wannaTalk = true;
         breakCoroutine = false;
         StartCoroutine(IzzyBehaviour());
     }
@@ -27,45 +33,41 @@ public class IzzyAnimation : MonoBehaviour
     void Update()
     { 
         anim.SetBool("Jump", jump);
-        anim.SetBool("Lose", lost);
-        anim.SetBool("Hello", hello);
+        inSight = IsInSight();
     }
 
     private void Jump()
     {
         jump = true;
-        lost = hello = false;
+        lost =  false;
     }
 
     private void Damage()
     {
         lost = true;
-        jump = hello = false;
+        jump = false;
     }
 
-
-    private void Hello()
-    {
-        hello = true;
-        jump = lost =  false;
-    }
 
     private IEnumerator IzzyBehaviour()
     {
-
+        yield return new WaitForSeconds(5);
         if (isDialog)
         {
             yield break;
         }
-        if(isInRange && wannaTalk)
+        if(inSight && wannaTalk)
         {
+            anim.Play("human_hello_friendly", -1, 1);
+            print("Hello my friend");
 
+            StartCoroutine(IzzyBehaviour());
         }
 
+        yield return new WaitForSeconds(20);
         Wait();
         isAnimationEven = !isAnimationEven;
-
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(20);
         StartCoroutine(IzzyBehaviour());
         yield return null;
     }
@@ -76,5 +78,29 @@ public class IzzyAnimation : MonoBehaviour
             anim.Play("WAIT02", -1, 1);
         else
             anim.Play("WAIT01", -1, 1);
+    }
+
+    private bool IsInSight()
+    {
+
+        Vector3 direction = player.transform.position - transform.position;
+        float angle = Vector3.Angle(direction, transform.forward);
+
+
+
+        if(angle < fieldOfViewAngle)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, range) && hit.collider.gameObject.tag == "Player")
+            {
+                //Debug.Log("Did Hit");
+                inSight = true;
+            }
+            else
+                inSight = false;
+        }
+
+
+        return inSight;
     }
 }
