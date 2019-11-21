@@ -51,25 +51,29 @@ public class IzzyAnimation : MonoBehaviour
 
     private IEnumerator IzzyBehaviour()
     {
-        yield return new WaitForSeconds(5);
-        if (isDialog)
+        while(!breakCoroutine)
         {
-            yield break;
-        }
-        if(inSight && wannaTalk)
-        {
-            anim.Play("human_hello_friendly", -1, 1);
-            print("Hello my friend");
+            if (isDialog)
+            {
+                yield break;
+            }
+            while(inSight && wannaTalk)
+            {
+                anim.Play("human_hello_friendly", -1, 1);
+                print("Hello my friend");
+                yield return new WaitForSeconds(10);
+            }
 
-            StartCoroutine(IzzyBehaviour());
+            while (!inSight || !wannaTalk)
+            {
+                Wait();
+                isAnimationEven = !isAnimationEven;
+                yield return new WaitForSeconds(10);
+            }
+
+            yield return null;
         }
 
-        yield return new WaitForSeconds(20);
-        Wait();
-        isAnimationEven = !isAnimationEven;
-        yield return new WaitForSeconds(20);
-        StartCoroutine(IzzyBehaviour());
-        yield return null;
     }
 
     private void Wait()
