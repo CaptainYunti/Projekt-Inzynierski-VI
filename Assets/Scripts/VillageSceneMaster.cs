@@ -116,14 +116,18 @@ public class VillageSceneMaster : MonoBehaviour
         while (!ready)
         {
             ready = TalkDistance() && izzyWannaTalk;
-            yield return new WaitForSeconds(3);
+            yield return null;
+
         }
 
         Camera[] cameras = Camera.allCameras;
         DialogueNode node;
         bool canGoNext = false;
+        player.GetComponent<HeroMovement>().ReadyToDialogue();
         player.GetComponent<HeroMovement>().enabled = false;
+        yield return null;
         player.GetComponent<HeroUI>().enabled = false;
+        yield return null;
 
 
         izzyCamera.enabled = true;
@@ -137,9 +141,9 @@ public class VillageSceneMaster : MonoBehaviour
 
         izzyCamera.enabled = true;
         canvasDialogue.enabled = true;
+        canvasPlayer.enabled = false;
         print("Przeszłem xD");
         yield return new WaitForSeconds(3);
-        canvasPlayer.enabled = false;
 
         playerText1.text = "";
         playerText2.text = "";
@@ -154,6 +158,7 @@ public class VillageSceneMaster : MonoBehaviour
             {
                 if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
                     canGoNext = true;
+                yield return null;
             }
             canGoNext = false;
         }
@@ -186,6 +191,7 @@ public class VillageSceneMaster : MonoBehaviour
                     canGoNext = true;
                 }
             }
+            yield return null;
         }
 
         canGoNext = false;
@@ -203,6 +209,7 @@ public class VillageSceneMaster : MonoBehaviour
             {
                 if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
                     canGoNext = true;
+                yield return null;
             }
             canGoNext = false;
         }

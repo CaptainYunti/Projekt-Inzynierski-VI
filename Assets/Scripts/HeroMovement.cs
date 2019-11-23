@@ -223,6 +223,11 @@ public class HeroMovement : MonoBehaviour
 
     }
 
+    public void ReadyToDialogue()
+    {
+        walk = run = false;
+    }
+
 
 
 
