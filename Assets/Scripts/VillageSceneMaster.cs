@@ -12,7 +12,7 @@ public class VillageSceneMaster : MonoBehaviour
     Canvas canvasDialogue;
     Text izzyText;
     Text playerText1, playerText2, playerText3;
-    Camera playerCamera, izzyCamera;
+    Camera playerCamera, izzyCamera, mainCamera;
     List<DialogueNode> dialogueIzzy;
     bool izzyWannaTalk;
     bool isReadyToTalk;
@@ -120,13 +120,19 @@ public class VillageSceneMaster : MonoBehaviour
 
         }
 
+
         Camera[] cameras = Camera.allCameras;
         DialogueNode node;
         bool canGoNext = false;
         player.GetComponent<HeroMovement>().ReadyToDialogue();
+        yield return null;
         player.GetComponent<HeroMovement>().enabled = false;
         yield return null;
+        player.GetComponent<HeroAttack>().enabled = false;
+        yield return null;
         player.GetComponent<HeroUI>().enabled = false;
+        yield return null;
+        izzy.GetComponent<IzzyAnimation>().enabled = false;
         yield return null;
 
 
@@ -142,18 +148,21 @@ public class VillageSceneMaster : MonoBehaviour
         izzyCamera.enabled = true;
         canvasDialogue.enabled = true;
         canvasPlayer.enabled = false;
-        print("Przeszłem xD");
-        yield return new WaitForSeconds(3);
 
-        playerText1.text = "";
-        playerText2.text = "";
-        playerText3.text = "";
+        izzyText.text = " ";
+        playerText1.text = " ";
+        playerText2.text = " ";
+        playerText3.text = " ";
+        yield return null;
 
         node = dialogueIzzy[0];
 
         for(int i = 0; i < 3; i++)
         {
+            yield return null;
             izzyText.text = node.GetText();
+            izzyText.color = Color.white;
+            yield return null;
             while (!canGoNext)
             {
                 if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
@@ -173,23 +182,36 @@ public class VillageSceneMaster : MonoBehaviour
 
         while(!canGoNext)
         {
-            if(Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))
+            if (playerText1.GetComponent<TextDialogueInteraction>().pointerOver)
             {
-                if (EventSystem.current.currentSelectedGameObject == playerText1)
+                if (Input.GetMouseButtonDown(0))
                 {
                     node = dialogueIzzy[2];
                     canGoNext = true;
                 }
-                if (EventSystem.current.currentSelectedGameObject == playerText2)
+                print("napis 1");
+                yield return null;
+
+            }
+            if (playerText2.GetComponent<TextDialogueInteraction>().pointerOver)
+            {
+                if (Input.GetMouseButtonDown(0))
                 {
                     node = dialogueIzzy[3];
                     canGoNext = true;
                 }
-                if (EventSystem.current.currentSelectedGameObject == playerText3)
+                print("napis 2");
+                yield return null;
+            }
+            if (playerText3.GetComponent<TextDialogueInteraction>().pointerOver)
+            {
+                if (Input.GetMouseButtonDown(0))
                 {
                     node = dialogueIzzy[4];
                     canGoNext = true;
                 }
+                print("napis 3");
+                yield return null;
             }
             yield return null;
         }
@@ -198,9 +220,9 @@ public class VillageSceneMaster : MonoBehaviour
         izzyCamera.enabled = true;
         playerCamera.enabled = false;
 
-        playerText1.text = "";
-        playerText2.text = "";
-        playerText3.text = "";
+        playerText1.text = " ";
+        playerText2.text = " ";
+        playerText3.text = " ";
 
         for (int i = 0; i < 3; i++)
         {
@@ -214,11 +236,15 @@ public class VillageSceneMaster : MonoBehaviour
             canGoNext = false;
         }
 
+        mainCamera.enabled = true;
         izzyCamera.enabled = false;
-        Camera.main.enabled = true;
         player.GetComponent<HeroMovement>().enabled = true;
         player.GetComponent<HeroUI>().enabled = true;
+        izzy.GetComponent<IzzyAnimation>().enabled = true;
+        player.GetComponent<HeroAttack>().enabled = true;
+        yield return null;
         izzyWannaTalk = false;
+        izzy.GetComponent<IzzyAnimation>().wannaTalk = false;
         canvasPlayer.enabled = true;
         canvasDialogue.enabled = false;
 
@@ -237,6 +263,8 @@ public class VillageSceneMaster : MonoBehaviour
                 playerCamera = c;
             if (c.name == "Camera Izzy")
                 izzyCamera = c;
+            if (c == Camera.main)
+                mainCamera = Camera.main;
         }
     }
 }

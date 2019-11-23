@@ -14,7 +14,7 @@ public class DialogueNode
 
     public DialogueNode(string[] dialogues, int dialoguesCount, bool isPlayerDialogue, int parentID)
     {
-        this.dialogues = new string[dialoguesCount];
+        this.dialogues = dialogues;
         this.dialoguesCount = dialoguesCount;
         this.isPlayerDialogue = isPlayerDialogue;
         this.parentID = parentID;
@@ -47,9 +47,9 @@ public class DialogueNode
     public string GetText()
     {
         if (dialogNumber >= dialoguesCount)
-            return "";
+            return " ";
 
-        return dialogues[dialogNumber];
+        return dialogues[dialogNumber++];
     }
 
     public void ResetTextCount() => dialogNumber = 0;
