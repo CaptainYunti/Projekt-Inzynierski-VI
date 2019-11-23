@@ -25,6 +25,7 @@ public class HeroAttack : MonoBehaviour
         {
             eat = true;
             beak.SetActive(true);
+            print("dziób");
         }
         else
         {

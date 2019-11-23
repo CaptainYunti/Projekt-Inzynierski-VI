@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Friend
   - Ally
+  - NPC
   layers:
   - Default
   - TransparentFX

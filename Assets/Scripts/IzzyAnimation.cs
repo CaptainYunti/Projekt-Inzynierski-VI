@@ -8,7 +8,7 @@ public class IzzyAnimation : MonoBehaviour
     public bool jump, lost;
 
     [SerializeField]
-    bool isDialog, isAnimationEven, wannaTalk, inSight;
+    public bool isDialog, isAnimationEven, wannaTalk, inSight;
 
     [SerializeField]
     float range, fieldOfViewAngle;
