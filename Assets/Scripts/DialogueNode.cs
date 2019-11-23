@@ -4,34 +4,26 @@ using UnityEngine;
 
 public class DialogueNode
 {
+    public int id;
     string[] dialogues;
     int dialoguesCount, dialogNumber;
     bool isPlayerDialogue;
-    public DialogueNode parent;
-    public List<DialogueNode> childs = new List<DialogueNode>();
+    public int parentID;
+    public List<int> childID = new List<int>();
 
 
-    public DialogueNode(string[] dialogues, int dialoguesCount, bool isPlayerDialogue, DialogueNode parent)
+    public DialogueNode(string[] dialogues, int dialoguesCount, bool isPlayerDialogue, int parentID)
     {
         this.dialogues = new string[dialoguesCount];
         this.dialoguesCount = dialoguesCount;
         this.isPlayerDialogue = isPlayerDialogue;
-        this.parent = parent;
-        this.childs = null;
-        parent.childs.Add(this);
-    }
-    public DialogueNode(string[] dialogues, int dialoguesCount, bool isPlayerDialogue)
-    {
-        this.dialogues = new string[dialoguesCount];
-        this.dialoguesCount = dialoguesCount;
-        this.isPlayerDialogue = isPlayerDialogue;
-        this.childs = null;
-        parent = null;
+        this.parentID = parentID;
     }
 
-    public DialogueNode GetParent() => this.parent;
 
-    public DialogueNode GetChild(int number)
+    //public DialogueNode GetParent() => this.parent;
+
+   /* public DialogueNode GetChild(int number)
     {
         try
         {
@@ -50,7 +42,7 @@ public class DialogueNode
         }
 
         return node;
-    }
+    }*/
 
     public string GetText()
     {

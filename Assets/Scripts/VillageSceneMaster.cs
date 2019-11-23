@@ -48,10 +48,6 @@ public class VillageSceneMaster : MonoBehaviour
         StartCoroutine(FirstDialogue());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
     private ref bool GetIzzyTalk(ref bool izzyTalk)
     {
@@ -66,7 +62,7 @@ public class VillageSceneMaster : MonoBehaviour
         text[count++] = "Cześć kurczak!";
         text[count++] = "Ładną pogodzę dziś mamy.";
         text[count++] = "Co dziś jesz na obiad?";
-        DialogueNode izzy1 = new DialogueNode(text, count, false);
+        DialogueNode izzy1 = new DialogueNode(text, count, false, 0);
         dialogueIzzy.Add(izzy1);
 
         text = new string[32];
@@ -75,7 +71,7 @@ public class VillageSceneMaster : MonoBehaviour
         text[count++] = "Fajne masz cycki! Wpierdolę je!";
         text[count++] = "Rzeczywiście ładnie tutaj, jak tak patrzę... To no rzeczywiście lepiej niż jakbym nie patrzył.";
         text[count++] = "Hehehehehehe xD";
-        DialogueNode player1 = new DialogueNode(text, count, true, izzy1);
+        DialogueNode player1 = new DialogueNode(text, count, true, izzy1.id);
         dialogueIzzy.Add(player1);
 
         text = new string[32];
@@ -84,7 +80,7 @@ public class VillageSceneMaster : MonoBehaviour
         text[count++] = "Co?";
         text[count++] = "Jak śmiesz, Ty jebiąca kogucią spermą ofiaro losu. Sperdalaj! Oby te krowy Cię zajebały, przeżuły i wysrały na nasiona.";
         text[count++] = "Nasiona które zjedzą Twoje małe bombelki xD";
-        DialogueNode izzy2 = new DialogueNode(text, count, false, player1);
+        DialogueNode izzy2 = new DialogueNode(text, count, false, player1.id);
         dialogueIzzy.Add(izzy2);
 
         text = new string[32];
@@ -93,7 +89,7 @@ public class VillageSceneMaster : MonoBehaviour
         text[count++] = "A to dobrze.";
         text[count++] = "Jak skończysz gapić mi się na cycki, to może zauważysz wściekłe irackie krowy idące Ci wpierdolić.";
         text[count++] = "Powodzenia Kwoko";
-        DialogueNode izzy3 = new DialogueNode(text, count, false, player1);
+        DialogueNode izzy3 = new DialogueNode(text, count, false, player1.id);
         dialogueIzzy.Add(izzy3);
 
         text = new string[32];
@@ -101,7 +97,7 @@ public class VillageSceneMaster : MonoBehaviour
 
         text[count++] = "Hehe xD";
         text[count++] = "Krowa xD";
-        DialogueNode izzy4 = new DialogueNode(text, count, false, player1);
+        DialogueNode izzy4 = new DialogueNode(text, count, false, player1.id);
         dialogueIzzy.Add(izzy4);
 
     }
@@ -120,21 +116,31 @@ public class VillageSceneMaster : MonoBehaviour
         while (!ready)
         {
             ready = TalkDistance() && izzyWannaTalk;
-            yield return null;
+            yield return new WaitForSeconds(3);
         }
-        print("Przeszłem xD");
+
         Camera[] cameras = Camera.allCameras;
         DialogueNode node;
         bool canGoNext = false;
         player.GetComponent<HeroMovement>().enabled = false;
         player.GetComponent<HeroUI>().enabled = false;
 
-        foreach (Camera cam in cameras)
-            cam.enabled = false;
 
         izzyCamera.enabled = true;
-        canvasPlayer.enabled = false;
+        foreach (Camera cam in cameras)
+        {
+            if (cam == izzyCamera);
+            else
+                cam.enabled = false;
+        }
+
+
+        izzyCamera.enabled = true;
         canvasDialogue.enabled = true;
+        print("Przeszłem xD");
+        yield return new WaitForSeconds(3);
+        canvasPlayer.enabled = false;
+
         playerText1.text = "";
         playerText2.text = "";
         playerText3.text = "";
@@ -152,7 +158,7 @@ public class VillageSceneMaster : MonoBehaviour
             canGoNext = false;
         }
 
-        node = node.GetChild(0);
+        node = dialogueIzzy[1];
         izzyCamera.enabled = false;
         playerCamera.enabled = true;
 
@@ -166,17 +172,17 @@ public class VillageSceneMaster : MonoBehaviour
             {
                 if (EventSystem.current.currentSelectedGameObject == playerText1)
                 {
-                    node = node.GetChild(0);
+                    node = dialogueIzzy[2];
                     canGoNext = true;
                 }
                 if (EventSystem.current.currentSelectedGameObject == playerText2)
                 {
-                    node = node.GetChild(1);
+                    node = dialogueIzzy[3];
                     canGoNext = true;
                 }
                 if (EventSystem.current.currentSelectedGameObject == playerText3)
                 {
-                    node = node.GetChild(2);
+                    node = dialogueIzzy[4];
                     canGoNext = true;
                 }
             }
