@@ -182,36 +182,23 @@ public class VillageSceneMaster : MonoBehaviour
 
         while(!canGoNext)
         {
-            if (playerText1.GetComponent<TextDialogueInteraction>().pointerOver)
+            if(Input.GetMouseButtonDown(0))
             {
-                if (Input.GetMouseButtonDown(0))
+                if (playerText1.GetComponent<TextDialogueInteraction>().pointerOver)
                 {
                     node = dialogueIzzy[2];
                     canGoNext = true;
                 }
-                print("napis 1");
-                yield return null;
-
-            }
-            if (playerText2.GetComponent<TextDialogueInteraction>().pointerOver)
-            {
-                if (Input.GetMouseButtonDown(0))
+                if (playerText2.GetComponent<TextDialogueInteraction>().pointerOver)
                 {
                     node = dialogueIzzy[3];
                     canGoNext = true;
                 }
-                print("napis 2");
-                yield return null;
-            }
-            if (playerText3.GetComponent<TextDialogueInteraction>().pointerOver)
-            {
-                if (Input.GetMouseButtonDown(0))
+                if (playerText3.GetComponent<TextDialogueInteraction>().pointerOver)
                 {
                     node = dialogueIzzy[4];
                     canGoNext = true;
                 }
-                print("napis 3");
-                yield return null;
             }
             yield return null;
         }
