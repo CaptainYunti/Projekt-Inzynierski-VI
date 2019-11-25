@@ -7,7 +7,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     public int maxHP;
     public int currentHP;
     public float speed;
-    //public int strength;
+    public int strength;
     //public float attackSpeed;
     public float range;
     public int expFromThis;
@@ -36,7 +36,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         StatsUpdate();
         return true;
     }
-    protected void GetDamage(int damage)
+    public void GetDamage(int damage)
     {
         currentHP -= damage;
         if(IsDead())
@@ -45,12 +45,13 @@ public abstract class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider col)
+    /*private void OnCollisonEnter(Collider col)
     {
-        if(col.gameObject.tag == "Weapon")
+        if(col.gameObject.tag == "Player Weapon")
         {
-
+            int damage = col.gameObject.GetComponent<Weapon>().GetDamage();
+            GetDamage(damage);
         }
-    }
+    }*/
 
 }

@@ -131,5 +131,10 @@ public static class HeroStats
         sheepLevel++;
     }
 
+    public static void GetDamage(int damage)
+    {
+        currentHP -= damage;
+    }
+
 
 }

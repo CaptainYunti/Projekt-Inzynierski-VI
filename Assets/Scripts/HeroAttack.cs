@@ -38,4 +38,13 @@ public class HeroAttack : MonoBehaviour
     {
         anim.SetBool("Eat", eat);
     }
+
+   /* private void OnCollisonEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Enemy Weapon")
+        {
+            int damage = col.gameObject.GetComponent<Weapon>().GetDamage();
+            HeroStats.GetDamage(damage);
+        }
+    }*/
 }
