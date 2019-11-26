@@ -61,12 +61,12 @@ public static class HeroStats
             return;
 
         level++;
-        exp = expNextLevel - exp;
-        expNextLevel = (int)(expNextLevel * 1.2f);
+        exp = exp - expNextLevel;
+        expNextLevel = (int)(expNextLevel * 1.5f);
         maxHP = (int)(maxHP * 1.3f);
         currentHP = maxHP;
-        strength++;
-        attackSpeed *= 0.9f;
+        //strength++;
+        attackSpeed *= 0.8f;
 
     }
 
@@ -76,7 +76,7 @@ public static class HeroStats
         killedChicken++;
         killedAllChicken++;
 
-        if (killedChicken < Mathf.Pow(chickenLevel + 1, 4))
+        if (killedChicken < Mathf.Pow(chickenLevel + 1, 2))
             return;
 
         killedChicken = 0;
@@ -89,7 +89,7 @@ public static class HeroStats
         killedPig++;
         killedAllPig++;
 
-        if (killedPig < Mathf.Pow(pigLevel + 1, 4))
+        if (killedPig < Mathf.Pow(pigLevel + 1, 2))
             return;
 
         killedAllPig = 0;
@@ -102,7 +102,7 @@ public static class HeroStats
         killedCow++;
         killedAllCow++;
 
-        if (killedCow < Mathf.Pow(cowLevel + 1, 4))
+        if (killedCow < Mathf.Pow(cowLevel + 1, 2))
             return;
 
         killedCow = 0;
@@ -115,7 +115,7 @@ public static class HeroStats
         killedDuck++;
         killedAllDuck++;
 
-        if (killedDuck < Mathf.Pow(duckLevel + 1, 4))
+        if (killedDuck < Mathf.Pow(duckLevel + 1, 2))
             return;
 
         killedDuck = 0;

@@ -19,15 +19,16 @@ public class HeroAttack : MonoBehaviour
         attackReady = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        if(Input.GetMouseButtonDown(0) && attackReady)
+
+        if (Input.GetMouseButtonDown(0) && attackReady)
         {
             eat = true;
             beak.SetActive(true);
             //print("dziób");
             StartCoroutine(PlayerAttack());
+            attackReady = false;
         }
         else
         {
@@ -36,6 +37,7 @@ public class HeroAttack : MonoBehaviour
         }
     }
 
+
     private void LateUpdate()
     {
         anim.SetBool("Eat", eat);
@@ -43,7 +45,6 @@ public class HeroAttack : MonoBehaviour
 
     private IEnumerator PlayerAttack()
     {
-        attackReady = false;
         yield return new WaitForSeconds(HeroStats.GetAttackSpeed());
         attackReady = true;
     }

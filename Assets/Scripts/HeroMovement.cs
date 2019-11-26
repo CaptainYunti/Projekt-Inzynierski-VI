@@ -42,10 +42,9 @@ public class HeroMovement : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-       
+               
         isJumpReady = ReadyToJump();
 
         if (Input.anyKey)
@@ -54,7 +53,6 @@ public class HeroMovement : MonoBehaviour
         }
         else
             walk = run = false;
-
     }
 
     private void LateUpdate()

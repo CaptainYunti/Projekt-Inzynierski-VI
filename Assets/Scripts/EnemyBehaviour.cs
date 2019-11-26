@@ -42,6 +42,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
     }
     public void GetDamage(int damage)
     {
+        if (currentHP <= 0)
+            return;
         currentHP -= damage;
         if(IsDead())
         {
