@@ -11,6 +11,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     //public float attackSpeed;
     public float range;
     public int expFromThis;
+    protected GameObject weapon;
 
     private void Start()
     {

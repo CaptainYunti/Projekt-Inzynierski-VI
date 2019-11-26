@@ -51,6 +51,7 @@ public class CowBehaviour : EnemyBehaviour
         strength = 4;
         expFromThis = 5;
         currentHP = maxHP = 4;
+        weapon = this.transform.Find("Cow Weapon").gameObject;
     }
 
     // Update is called once per frame

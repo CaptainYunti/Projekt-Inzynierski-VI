@@ -6,7 +6,7 @@ public class HeroAttack : MonoBehaviour
 {
 
     Animator anim;
-    bool eat;
+    bool eat, attackReady;
     GameObject beak;
     
     // Start is called before the first frame update
@@ -16,16 +16,18 @@ public class HeroAttack : MonoBehaviour
         eat = false;
         beak = GameObject.Find("Toon Chicken/Beak");
         beak.SetActive(false);
+        attackReady = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && attackReady)
         {
             eat = true;
             beak.SetActive(true);
             //print("dziób");
+            StartCoroutine(PlayerAttack());
         }
         else
         {
@@ -37,6 +39,13 @@ public class HeroAttack : MonoBehaviour
     private void LateUpdate()
     {
         anim.SetBool("Eat", eat);
+    }
+
+    private IEnumerator PlayerAttack()
+    {
+        attackReady = false;
+        yield return new WaitForSeconds(HeroStats.GetAttackSpeed());
+        attackReady = true;
     }
 
    /* private void OnCollisonEnter(Collider col)

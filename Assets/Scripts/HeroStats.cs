@@ -13,6 +13,7 @@ public static class HeroStats
     static int pigLevel;
     static int duckLevel;
     static int sheepLevel;
+    static float attackSpeed;
 
     static int killedChicken, killedCow, killedPig, killedDuck, killedSheep;
     static int killedAllChicken, killedAllCow, killedAllPig, killedAllDuck, killedAllSheep ;
@@ -36,6 +37,7 @@ public static class HeroStats
     public static int GetPigLevel() { return pigLevel; }
     public static int GetDuckLevel() { return duckLevel; }
     public static int GetSheepLevel() { return sheepLevel; }
+    public static float GetAttackSpeed() { return attackSpeed; }
 
 
 
@@ -49,6 +51,7 @@ public static class HeroStats
         cowLevel = pigLevel = duckLevel = sheepLevel = chickenLevel = 0;
         killedChicken = killedCow = killedDuck = killedPig = killedSheep = 0;
         killedAllChicken = killedAllCow = killedAllDuck = killedAllPig = killedAllSheep = 0;
+        attackSpeed = 5f;
     }
 
 
@@ -59,10 +62,11 @@ public static class HeroStats
 
         level++;
         exp = expNextLevel - exp;
-        expNextLevel = (int)(expNextLevel * 1.2);
-        maxHP = (int)(maxHP * 1.3);
+        expNextLevel = (int)(expNextLevel * 1.2f);
+        maxHP = (int)(maxHP * 1.3f);
         currentHP = maxHP;
         strength++;
+        attackSpeed *= 0.9f;
 
     }
 

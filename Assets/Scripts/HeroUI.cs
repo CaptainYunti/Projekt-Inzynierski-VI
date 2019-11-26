@@ -9,6 +9,7 @@ public class HeroUI : MonoBehaviour
     public GameObject backround;
     public Text health;
     public Text strength;
+    public Text attackSpeed;
     public Text level;
     public Text exp, expNextLevel;
     public Text chickenLevel, cowLevel, pigLevel, duckLevel, sheepLevel;
@@ -21,7 +22,7 @@ public class HeroUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        backround = GameObject.Find("Stats Background");
+        //backround = GameObject.Find("Stats Background");
         isUIActive = false;
         isUIStatsActive = false;
     }
@@ -32,6 +33,7 @@ public class HeroUI : MonoBehaviour
         healthBar.fillAmount = HeroStats.GetCurrentHP() / HeroStats.GetMaxHP();
         health.text = "Punkty życia: " + HeroStats.GetCurrentHP().ToString() + " / " + HeroStats.GetMaxHP().ToString();
         strength.text = "Siła: " + HeroStats.GetStrength().ToString();
+        attackSpeed.text = "Szybkość ataku: " + HeroStats.GetAttackSpeed().ToString();
         level.text = "Poziom: " + HeroStats.GetLevel().ToString();
         exp.text = "Exp: " + HeroStats.GetExp().ToString();
         expNextLevel.text = "Exp do następnego poziomu: " + HeroStats.GetNextLevel().ToString();
