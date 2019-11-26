@@ -10,6 +10,7 @@ TagManager:
   - Friend
   - Ally
   - NPC
+  - EnemyCow
   layers:
   - Default
   - TransparentFX

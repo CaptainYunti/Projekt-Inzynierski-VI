@@ -136,5 +136,9 @@ public static class HeroStats
         currentHP -= damage;
     }
 
+    public static void AddExp(int experience)
+    {
+        exp += experience;
+    }
 
 }

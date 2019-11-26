@@ -7,7 +7,7 @@ public class HeroWeapon : Weapon
     // Start is called before the first frame update
     void Start()
     {
-        
+        weaponDamage = HeroStats.GetStrength();
     }
 
     // Update is called once per frame

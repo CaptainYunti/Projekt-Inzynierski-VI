@@ -14,7 +14,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     private void Start()
     {
-        currentHP = maxHP = 4;
+
     }
     public abstract void AttackHero();
     public abstract void AttackNPC();
