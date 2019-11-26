@@ -57,6 +57,6 @@ public class CowBehaviour : EnemyBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        healthBar.fillAmount = (float)currentHP / maxHP;
     }
 }

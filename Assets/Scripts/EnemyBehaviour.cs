@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class EnemyBehaviour : MonoBehaviour
 {
@@ -12,11 +13,13 @@ public abstract class EnemyBehaviour : MonoBehaviour
     public float range;
     public int expFromThis;
     protected GameObject weapon;
+    public Image healthBar;
 
     private void Start()
     {
 
     }
+
     public abstract void AttackHero();
     public abstract void AttackNPC();
     public abstract void DefendNPC();

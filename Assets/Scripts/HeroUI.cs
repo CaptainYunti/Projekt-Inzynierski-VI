@@ -30,7 +30,7 @@ public class HeroUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.fillAmount = HeroStats.GetCurrentHP() / HeroStats.GetMaxHP();
+        healthBar.fillAmount = (float)HeroStats.GetCurrentHP() / HeroStats.GetMaxHP();
         health.text = "Punkty życia: " + HeroStats.GetCurrentHP().ToString() + " / " + HeroStats.GetMaxHP().ToString();
         strength.text = "Siła: " + HeroStats.GetStrength().ToString();
         attackSpeed.text = "Szybkość ataku: " + HeroStats.GetAttackSpeed().ToString();
