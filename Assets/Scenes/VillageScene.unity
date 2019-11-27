@@ -7170,7 +7170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9884d3095a34149b407d747522b2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cows: {fileID: 0}
+  cows: []
 --- !u!1 &526053434 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1458573784885960, guid: 6910e2407cd484a42a0c2598114751a0,
@@ -20025,7 +20025,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9884d3095a34149b407d747522b2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cows: {fileID: 163086189}
+  cows:
+  - {fileID: 7621715319372797098}
+  - {fileID: 8459895}
+  - {fileID: 268533197}
+  - {fileID: 1886524640}
+  - {fileID: 496040800}
+  - {fileID: 913053680}
+  - {fileID: 1319488926}
+  - {fileID: 829781293}
+  - {fileID: 1001467398}
+  - {fileID: 1644169250}
+  - {fileID: 93950499}
+  - {fileID: 342872778}
 --- !u!4 &1737279197
 Transform:
   m_ObjectHideFlags: 0

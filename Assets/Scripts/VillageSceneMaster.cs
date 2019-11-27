@@ -10,7 +10,7 @@ public class VillageSceneMaster : MonoBehaviour
     GameObject player;
     GameObject izzy;
     [SerializeField]
-    GameObject cows;
+    GameObject[] cows;
     Canvas canvasPlayer;
     Canvas canvasDialogue;
     Text izzyText;
@@ -60,16 +60,20 @@ public class VillageSceneMaster : MonoBehaviour
 
     private void DeactiveCows()
     {
-        try { cows.SetActive(false); }
-        catch (UnassignedReferenceException) { }
-
+        foreach(GameObject cow in cows)
+        {
+            cow.SetActive(false);
+        }
     }
 
 
 
     private void ActiveCows()
     {
-        cows.SetActive(true);
+        foreach (GameObject cow in cows)
+        {
+            cow.SetActive(true);
+        }
     }
 
     private ref bool GetIzzyTalk(ref bool izzyTalk)
@@ -91,35 +95,36 @@ public class VillageSceneMaster : MonoBehaviour
         text = new string[32];
         count = 0;
 
-        text[count++] = "Fajne masz cycki! Wpierdolę je!";
-        text[count++] = "Rzeczywiście ładnie tutaj, jak tak patrzę... To no rzeczywiście lepiej niż jakbym nie patrzył.";
-        text[count++] = "Hehehehehehe xD";
+        text[count++] = "Rzeczywiście ładna pogoda. A co słychać u Ciebie?";
+        text[count++] = "Coś ciekawego?";
+        text[count++] = "Nie obchodzi mnie to, idę sobie.";
         DialogueNode player1 = new DialogueNode(text, count, true, izzy1.id);
         dialogueIzzy.Add(player1);
 
         text = new string[32];
         count = 0;
 
-        text[count++] = "Co?";
-        text[count++] = "Jak śmiesz, Ty jebiąca kogucią spermą ofiaro losu. Sperdalaj! Oby te krowy Cię zajebały, przeżuły i wysrały na nasiona.";
-        text[count++] = "Nasiona które zjedzą Twoje małe bombelki xD";
+        text[count++] = "Obserwuję agresywne krowy.";
+        text[count++] = "Widziałeś może jakąś?";
+        text[count++] = "Jak zobaczysz, to czym prędzej uciekaj!";
         DialogueNode izzy2 = new DialogueNode(text, count, false, player1.id);
         dialogueIzzy.Add(izzy2);
 
         text = new string[32];
         count = 0;
 
-        text[count++] = "A to dobrze.";
-        text[count++] = "Jak skończysz gapić mi się na cycki, to może zauważysz wściekłe irackie krowy idące Ci wpierdolić.";
-        text[count++] = "Powodzenia Kwoko";
+        text[count++] = "Dziwne krowy przyszły do mojej wioski.";
+        text[count++] = "Strasznie się ich boję.";
+        text[count++] = "Mógłbyś je przepędzić?";
         DialogueNode izzy3 = new DialogueNode(text, count, false, player1.id);
         dialogueIzzy.Add(izzy3);
 
         text = new string[32];
         count = 0;
 
-        text[count++] = "Hehe xD";
-        text[count++] = "Krowa xD";
+        text[count++] = "To idź!";
+        text[count++] = "Żeby Cię zjadły wściekłe krowy.";
+        text[count++] = "Nie obchodzi mnie to!";
         DialogueNode izzy4 = new DialogueNode(text, count, false, player1.id);
         dialogueIzzy.Add(izzy4);
 
@@ -154,6 +159,8 @@ public class VillageSceneMaster : MonoBehaviour
         player.GetComponent<HeroAttack>().enabled = false;
         yield return null;
         player.GetComponent<HeroUI>().enabled = false;
+        yield return null;
+        izzy.GetComponent<IzzyAnimation>().wannaTalk = false;
         yield return null;
         izzy.GetComponent<IzzyAnimation>().StopCoroutine(izzy.GetComponent<IzzyAnimation>().IzzyBehaviour());
         //yield return null;
