@@ -49,7 +49,7 @@ public class IzzyAnimation : MonoBehaviour
     }
 
 
-    private IEnumerator IzzyBehaviour()
+    public IEnumerator IzzyBehaviour()
     {
         while(!breakCoroutine)
         {
@@ -68,7 +68,7 @@ public class IzzyAnimation : MonoBehaviour
             {
                 Wait();
                 isAnimationEven = !isAnimationEven;
-                yield return new WaitForSeconds(10);
+                yield return new WaitForSeconds(30);
             }
 
             yield return null;

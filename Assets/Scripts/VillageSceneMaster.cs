@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class VillageSceneMaster : MonoBehaviour
 {
     GameObject player;
     GameObject izzy;
+    [SerializeField]
+    GameObject cows;
     Canvas canvasPlayer;
     Canvas canvasDialogue;
     Text izzyText;
@@ -44,10 +47,24 @@ public class VillageSceneMaster : MonoBehaviour
         canvasPlayer.enabled = true;
         player.GetComponent<HeroUI>().enabled = true;
         ready = false;
+        DeactiveCows();
         print("Start");
         StartCoroutine(FirstDialogue());
     }
 
+    private void DeactiveCows()
+    {
+        try { cows.SetActive(false); }
+        catch ( UnassignedReferenceException e){ }
+
+    }
+
+
+
+    private void ActiveCows()
+    {
+        cows.SetActive(true);
+    }
 
     private ref bool GetIzzyTalk(ref bool izzyTalk)
     {
@@ -132,6 +149,8 @@ public class VillageSceneMaster : MonoBehaviour
         yield return null;
         player.GetComponent<HeroUI>().enabled = false;
         yield return null;
+        //izzy.GetComponent<IzzyAnimation>().StopCoroutine(izzy.GetComponent<IzzyAnimation>().IzzyBehaviour());
+        //yield return null;
         izzy.GetComponent<IzzyAnimation>().enabled = false;
         yield return null;
 
@@ -148,6 +167,7 @@ public class VillageSceneMaster : MonoBehaviour
         izzyCamera.enabled = true;
         canvasDialogue.enabled = true;
         canvasPlayer.enabled = false;
+
 
         izzyText.text = " ";
         playerText1.text = " ";
@@ -235,7 +255,8 @@ public class VillageSceneMaster : MonoBehaviour
         canvasPlayer.enabled = true;
         canvasDialogue.enabled = false;
 
-
+        ActiveCows();
+        //izzy.GetComponent<IzzyAnimation>().StartCoroutine(izzy.GetComponent<IzzyAnimation>().IzzyBehaviour());
 
         yield return null;
     }
@@ -254,4 +275,5 @@ public class VillageSceneMaster : MonoBehaviour
                 mainCamera = Camera.main;
         }
     }
+
 }

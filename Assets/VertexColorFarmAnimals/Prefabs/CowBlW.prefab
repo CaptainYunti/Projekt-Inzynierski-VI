@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23019307580939166}
   - component: {fileID: 95051569790832444}
   - component: {fileID: 3707880920103899365}
+  - component: {fileID: 7990088184176033729}
   m_Layer: 0
   m_Name: CowBlW
   m_TagString: Untagged
@@ -119,6 +120,20 @@ MonoBehaviour:
   strength: 0
   range: 0
   expFromThis: 0
+  healthBar: {fileID: 0}
+--- !u!65 &7990088184176033729
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287295899898638}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.92018014, y: 1.5299838, z: 2.107099}
+  m_Center: {x: 0.0036770701, y: 0.8168527, z: 0.13749051}
 --- !u!1 &1198346548348691136
 GameObject:
   m_ObjectHideFlags: 0
