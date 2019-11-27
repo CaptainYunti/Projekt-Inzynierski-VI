@@ -11,6 +11,7 @@ public class CowBehaviour : EnemyBehaviour
 
     public override IEnumerator Move()
     {
+        Coroutine move;
         Vector3 rotate;
         print("Krowa idzie");
         rotate = new Vector3(0, Random.Range(0, 360), 0);
@@ -19,8 +20,9 @@ public class CowBehaviour : EnemyBehaviour
 
             if (isMove)
             {
-                StartCoroutine(MoveForward());
+                move = StartCoroutine(MoveForward());
                 yield return new WaitForSeconds(0.015f);
+                StopCoroutine(move);
             }
             if (IsPlayerSeen())
             {
@@ -29,12 +31,12 @@ public class CowBehaviour : EnemyBehaviour
             }
             if (IsObstacleOnRoad())
             {
-                StopCoroutine(MoveForward());
                 rotate += new Vector3(0, 30, 0);
                 transform.Rotate(rotate);
                 yield return new WaitForSeconds(1f);
+                
             }
-
+            
         }
 
         isMove = false;
@@ -51,11 +53,13 @@ public class CowBehaviour : EnemyBehaviour
         {
             if (isWait)
             {
+                print("Czekam " + this.name);
                 yield return new WaitForSeconds(1f);
             }
             if(IsPlayerSeen())
             {
                 isFight = true;
+                print("Widzę Cię");
                 break;
             }
 
@@ -92,7 +96,9 @@ public class CowBehaviour : EnemyBehaviour
         expFromThis = 5;
         currentHP = maxHP = 4;
         weapon = this.transform.Find("Cow Weapon").gameObject;
+        weapon.SetActive(false);
         doNothingTime = Random.Range(5, 10);
+        print("Zaczynam");
         StartCoroutine(NormalBehaviour());
     }
 
@@ -130,8 +136,8 @@ public class CowBehaviour : EnemyBehaviour
     private bool IsObstacleOnRoad()
     {
         Vector3 forward = transform.TransformDirection(Vector3.forward);
-
-        if (Physics.Raycast(transform.position + transform.up, transform.forward, 1))
+        //RaycastHit hit = new RaycastHit();
+        if (Physics.Raycast(transform.position + transform.up * 0.5f, transform.forward, 3))
             return true;
 
         return false;

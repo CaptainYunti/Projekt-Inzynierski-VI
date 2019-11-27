@@ -14,8 +14,9 @@ public class IzzyAnimation : MonoBehaviour
     float range, fieldOfViewAngle;
 
     private Animator anim;
-    private bool breakCoroutine;
+    public bool breakCoroutine;
     private GameObject player;
+    public IEnumerator cor;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,8 @@ public class IzzyAnimation : MonoBehaviour
         isDialog = inSight = isAnimationEven = false;
         wannaTalk = true;
         breakCoroutine = false;
-        StartCoroutine(IzzyBehaviour());
+        cor = IzzyBehaviour();
+        StartCoroutine(cor);
     }
 
     // Update is called once per frame

@@ -162,8 +162,10 @@ public class VillageSceneMaster : MonoBehaviour
         yield return null;
         izzy.GetComponent<IzzyAnimation>().wannaTalk = false;
         yield return null;
-        izzy.GetComponent<IzzyAnimation>().StopCoroutine(izzy.GetComponent<IzzyAnimation>().IzzyBehaviour());
-        //yield return null;
+        izzy.GetComponent<IzzyAnimation>().breakCoroutine = true;
+        yield return null;
+        izzy.GetComponent<IzzyAnimation>().StopAllCoroutines();
+        yield return null;
         izzy.GetComponent<IzzyAnimation>().enabled = false;
         yield return null;
 
