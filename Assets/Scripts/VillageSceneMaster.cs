@@ -52,10 +52,16 @@ public class VillageSceneMaster : MonoBehaviour
         StartCoroutine(FirstDialogue());
     }
 
+    private void LateUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+    }
+
     private void DeactiveCows()
     {
         try { cows.SetActive(false); }
-        catch ( UnassignedReferenceException e){ }
+        catch (UnassignedReferenceException) { }
 
     }
 
@@ -149,7 +155,7 @@ public class VillageSceneMaster : MonoBehaviour
         yield return null;
         player.GetComponent<HeroUI>().enabled = false;
         yield return null;
-        //izzy.GetComponent<IzzyAnimation>().StopCoroutine(izzy.GetComponent<IzzyAnimation>().IzzyBehaviour());
+        izzy.GetComponent<IzzyAnimation>().StopCoroutine(izzy.GetComponent<IzzyAnimation>().IzzyBehaviour());
         //yield return null;
         izzy.GetComponent<IzzyAnimation>().enabled = false;
         yield return null;
@@ -252,6 +258,7 @@ public class VillageSceneMaster : MonoBehaviour
         yield return null;
         izzyWannaTalk = false;
         izzy.GetComponent<IzzyAnimation>().wannaTalk = false;
+        yield return null;
         canvasPlayer.enabled = true;
         canvasDialogue.enabled = false;
 

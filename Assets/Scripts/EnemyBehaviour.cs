@@ -10,10 +10,17 @@ public abstract class EnemyBehaviour : MonoBehaviour
     public float speed;
     public int strength;
     //public float attackSpeed;
+    [SerializeField]
+    protected float fieldOfViewAngle;
+    protected bool inSight;
     public float range;
     public int expFromThis;
     protected GameObject weapon;
+    protected GameObject player;
     public Image healthBar;
+    protected int doNothingTime, goSomewhereTime;
+    protected bool isWait, isMove, isRun, isFight;
+    protected bool changeState;
 
     private void Start()
     {
@@ -21,17 +28,33 @@ public abstract class EnemyBehaviour : MonoBehaviour
     }
 
     public abstract void AttackHero();
-    public abstract void AttackNPC();
-    public abstract void DefendNPC();
-    public bool IsInRange(GameObject player)
+    //public abstract void AttackNPC();
+    //public abstract void DefendNPC();
+    public bool IsPlayerSeen()
     {
-        return false;
-        //tu bedzie cos mondrego xD
+        Vector3 direction = player.transform.position - transform.position;
+        float angle = Vector3.Angle(direction, transform.forward);
+
+
+
+        if (angle < fieldOfViewAngle)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, range) && hit.collider.gameObject.tag == "Player")
+            {
+                //Debug.Log("Did Hit");
+                inSight = true;
+            }
+            else
+                inSight = false;
+        }
+
+
+        return inSight;
     }
     public abstract void Run();
-    public abstract void RunRandom();
-    public abstract void NormalBehaviour();
-    public abstract void Move();
+    public abstract IEnumerator NormalBehaviour();
+    public abstract IEnumerator Move();
     protected abstract void StatsUpdate();
     public bool IsDead()
     {
