@@ -35,6 +35,12 @@ public class HeroAttack : MonoBehaviour
             eat = false;
             beak.SetActive(false);
         }
+
+        //do testowania
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            HeroStats.GetDamage(1);
+        }
     }
 
 

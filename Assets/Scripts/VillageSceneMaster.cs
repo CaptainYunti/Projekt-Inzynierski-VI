@@ -88,7 +88,7 @@ public class VillageSceneMaster : MonoBehaviour
 
         text[count++] = "Cześć kurczak!";
         text[count++] = "Ładną pogodzę dziś mamy.";
-        text[count++] = "Co dziś jesz na obiad?";
+        text[count++] = "Co u Ciebie słychać?";
         DialogueNode izzy1 = new DialogueNode(text, count, false, 0);
         dialogueIzzy.Add(izzy1);
 
@@ -96,8 +96,8 @@ public class VillageSceneMaster : MonoBehaviour
         count = 0;
 
         text[count++] = "Rzeczywiście ładna pogoda. A co słychać u Ciebie?";
-        text[count++] = "Coś ciekawego?";
-        text[count++] = "Nie obchodzi mnie to, idę sobie.";
+        text[count++] = "Wszystko dobrze.";
+        text[count++] = "Nie obchodzi mnie to, idę sobie!";
         DialogueNode player1 = new DialogueNode(text, count, true, izzy1.id);
         dialogueIzzy.Add(player1);
 
