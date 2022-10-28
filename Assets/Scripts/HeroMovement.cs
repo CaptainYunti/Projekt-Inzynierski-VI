@@ -42,7 +42,7 @@ public class HeroMovement : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
                
         isJumpReady = ReadyToJump();

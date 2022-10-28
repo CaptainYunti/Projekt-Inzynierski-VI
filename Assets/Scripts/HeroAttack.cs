@@ -19,7 +19,7 @@ public class HeroAttack : MonoBehaviour
         attackReady = true;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
 
         if (Input.GetMouseButtonDown(0) && attackReady)
@@ -33,7 +33,7 @@ public class HeroAttack : MonoBehaviour
         else
         {
             eat = false;
-            beak.SetActive(false);
+
         }
 
         //do testowania
@@ -51,8 +51,11 @@ public class HeroAttack : MonoBehaviour
 
     private IEnumerator PlayerAttack()
     {
+        yield return new WaitForSeconds(.5f);
+        beak.SetActive(false);
         yield return new WaitForSeconds(HeroStats.GetAttackSpeed());
         attackReady = true;
+  
     }
 
    /* private void OnCollisonEnter(Collider col)

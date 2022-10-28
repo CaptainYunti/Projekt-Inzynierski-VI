@@ -51,7 +51,7 @@ public static class HeroStats
         cowLevel = pigLevel = duckLevel = sheepLevel = chickenLevel = 0;
         killedChicken = killedCow = killedDuck = killedPig = killedSheep = 0;
         killedAllChicken = killedAllCow = killedAllDuck = killedAllPig = killedAllSheep = 0;
-        attackSpeed = 5f;
+        attackSpeed = 1f;
     }
 
 
