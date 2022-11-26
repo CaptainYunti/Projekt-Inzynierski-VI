@@ -13,7 +13,7 @@ public class CowBehaviour : EnemyBehaviour
     {
         Coroutine move;
         Vector3 rotate;
-        print("Krowa idzie");
+        Debug.Log("Krowa idzie");
         rotate = new Vector3(0, Random.Range(0, 360), 0);
         for (int i = 0; i < goSomewhereTime*60; i++)
         {
@@ -53,13 +53,13 @@ public class CowBehaviour : EnemyBehaviour
         {
             if (isWait)
             {
-                print("Czekam " + this.name);
+                Debug.Log("Czekam " + this.name);
                 yield return new WaitForSeconds(1f);
             }
             if(IsPlayerSeen())
             {
                 isFight = true;
-                print("Widzę Cię");
+                Debug.Log("Widzę Cię");
                 break;
             }
 
@@ -69,7 +69,7 @@ public class CowBehaviour : EnemyBehaviour
         if(!isFight)
             isMove = true;
         changeState = true;
-        print("Krowa konczy czekac");
+        Debug.Log("Krowa konczy czekac");
         yield return null;
     }
 
@@ -85,7 +85,7 @@ public class CowBehaviour : EnemyBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         changeState = false;
         isWait = true;
@@ -98,7 +98,7 @@ public class CowBehaviour : EnemyBehaviour
         weapon = this.transform.Find("Cow Weapon").gameObject;
         weapon.SetActive(false);
         doNothingTime = Random.Range(5, 10);
-        print("Zaczynam");
+        Debug.Log("Zaczynam");
         StartCoroutine(NormalBehaviour());
     }
 
