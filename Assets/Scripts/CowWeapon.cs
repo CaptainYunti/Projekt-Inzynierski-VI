@@ -7,23 +7,31 @@ public class CowWeapon : Weapon
     public override void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Player")
+        {
+            Debug.Log("Jebudu w " + col.gameObject.name);
             HeroStats.GetDamage(GetDamage());
+        }
+
+    }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("Jebudu");
+            HeroStats.GetDamage(GetDamage());
+        }
+
     }
 
     protected override void Attack(int damage)
     {
-        weaponDamage = GetComponent<CowBehaviour>().strength;
+        throw new System.NotImplementedException();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        weaponDamage = GetComponent<CowBehaviour>().strength;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        weaponDamage = FindObjectOfType<CowBehaviour>().strength;
     }
 }

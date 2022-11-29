@@ -21,9 +21,11 @@ public abstract class Weapon : MonoBehaviour
     protected abstract void Attack(int damage);
     public int GetDamage()
     {
-        Attack(weaponDamage);
+        //Attack(weaponDamage);
         return weaponDamage;
     }
 
     public abstract void OnCollisionEnter(Collision col);
+
+    public abstract void OnTriggerEnter(Collider other);
 }

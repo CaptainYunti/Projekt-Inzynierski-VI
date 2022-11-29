@@ -22,12 +22,15 @@ public abstract class EnemyBehaviour : MonoBehaviour
     protected bool isWait, isMove, isRun, isFight;
     protected bool changeState;
 
+    [SerializeField] protected float attackRange = 5;
+    [SerializeField] protected float attackSpeed = 5;
+
     private void Start()
     {
 
     }
 
-    public abstract void AttackHero();
+    public abstract IEnumerator AttackHero();
     //public abstract void AttackNPC();
     //public abstract void DefendNPC();
     public bool IsPlayerSeen()
@@ -52,7 +55,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
         return inSight;
     }
-    public abstract void Run();
+    public abstract IEnumerator Run();
     public abstract IEnumerator NormalBehaviour();
     public abstract IEnumerator Move();
     protected abstract void StatsUpdate();

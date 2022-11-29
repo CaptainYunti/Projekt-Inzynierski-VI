@@ -4,9 +4,49 @@ using UnityEngine;
 
 public class CowBehaviour : EnemyBehaviour
 {
-    public override void AttackHero()
+
+    [SerializeField] CowWeapon cowWeapon;
+
+    public override IEnumerator AttackHero()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Walczę");
+
+        while(IsPlayerSeen())
+        {
+            if(currentHP / maxHP < 0.1)
+            {
+                isRun = true;
+                break;
+            }
+
+            transform.LookAt(player.transform);
+
+            cowWeapon.enabled = true;
+
+            while(IsPlayerSeen())
+            {
+                transform.position += transform.forward * speed * Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+
+            cowWeapon.enabled = false;
+
+            //cowWeapon.enabled = false;
+
+            yield return new WaitForSeconds(attackSpeed);
+
+
+        }
+
+        isFight = false;
+        if(!isRun)
+        {
+            isWait = true;
+        }
+        changeState = true;
+
+        yield return null;
+
     }
 
     public override IEnumerator Move()
@@ -44,6 +84,37 @@ public class CowBehaviour : EnemyBehaviour
             isWait = true;
         changeState = true;
         yield return null;
+    
+    }    
+    public override IEnumerator Run()
+    {
+        Coroutine move;
+        Vector3 rotate;
+        Debug.Log("Krowa ucieka");
+        rotate = new Vector3(0, 180, 0);
+        for (int i = 0; i < goSomewhereTime*60; i++)
+        {
+
+            if (isRun)
+            {
+                move = StartCoroutine(MoveForward());
+                yield return new WaitForSeconds(0.015f);
+                StopCoroutine(move);
+            }
+            if (IsObstacleOnRoad())
+            {
+                rotate += new Vector3(0, 30, 0);
+                transform.Rotate(rotate);
+                yield return new WaitForSeconds(1f);
+                
+            }
+            
+        }
+
+        isRun = false;
+        isWait = true;
+        changeState = true;
+        yield return null;
     }
 
     public override IEnumerator NormalBehaviour()
@@ -73,11 +144,6 @@ public class CowBehaviour : EnemyBehaviour
         yield return null;
     }
 
-    public override void Run()
-    {
-        throw new System.NotImplementedException();
-    }
-
     protected override void StatsUpdate()
     {
         HeroStats.AddExp(expFromThis);
@@ -87,6 +153,7 @@ public class CowBehaviour : EnemyBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
+        attackRange = 5f;
         changeState = false;
         isWait = true;
         isFight = isMove = isRun = false;
@@ -95,10 +162,8 @@ public class CowBehaviour : EnemyBehaviour
         strength = 4;
         expFromThis = 5;
         currentHP = maxHP = 4;
-        weapon = this.transform.Find("Cow Weapon").gameObject;
-        weapon.SetActive(false);
         doNothingTime = Random.Range(5, 10);
-        Debug.Log("Zaczynam");
+        //Debug.Log("Zaczynam");
         StartCoroutine(NormalBehaviour());
     }
 
@@ -114,11 +179,20 @@ public class CowBehaviour : EnemyBehaviour
                 doNothingTime = Random.Range(5, 30);
                 StartCoroutine(NormalBehaviour());
             }
-                
+             
             if (isMove)
             {
                 goSomewhereTime = Random.Range(10, 60);
                 StartCoroutine(Move());
+            }
+            if (isRun)
+            {
+                goSomewhereTime = Random.Range(10, 60);
+                StartCoroutine(Run());
+            }
+            if (isFight)
+            {
+                StartCoroutine(AttackHero());
             }
                 
 

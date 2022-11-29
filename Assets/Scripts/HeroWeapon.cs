@@ -39,4 +39,9 @@ public class HeroWeapon : Weapon
         if (col.gameObject.tag.Contains("Enemy"))
             col.gameObject.GetComponent<EnemyBehaviour>().GetDamage(weaponDamage);
     }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+        throw new System.NotImplementedException();
+    }
 }
